@@ -3,15 +3,19 @@ from langchain.vectorstores import FAISS
 from langchain.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter 
 
+# Define a path to the data
 DATA_PATH = 'data/'
+# Define a path to the vector database
 DB_FAISS_PATH = 'vectorstore/db_faiss'
+
 
 # Create vector database
 def create_vector_db():
+    # Load the documents
     loader = DirectoryLoader(DATA_PATH,
-                             glob='*.pdf',
+                             glob='*.pdf', 
                              loader_cls=PyPDFLoader)
-
+    # Split the documents into chunks
     documents = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=500,
                                                    chunk_overlap=50)
